@@ -1,0 +1,61 @@
+---
+  - hosts: all
+    sudo: True
+    user: ashokrajar
+
+    tasks:
+    - name: Copy Dependency Files
+      copy: src={{ item }} dest=/opt/
+      with_fileglob:
+        - /Users/Ashok/Downloads/ansible_workshop_rc14/*
+
+    - name: group hosts by distribution
+      group_by: key="{{ ansible_distribution }}"
+
+  - hosts: CentOS:RedHat
+    sudo: True
+    user: ashokrajar
+
+    tasks:
+    - name: Install Java
+      yum: name=/opt/jdk-7u55-linux-x64.rpm state=present
+
+    - name: Install Elastic Search
+      yum: name=/opt/elasticsearch-1.1.1.noarch.rpm state=present
+
+  - hosts: Ubuntu
+    sudo: True
+    user: ashokrajar
+
+    tasks:
+    - name: Install Java
+      apt: deb=/opt/oracle-java7-jdk_7u55_amd64.deb state=installed
+
+    - name: Install Elastic Search
+      apt: deb=/opt/elasticsearch-1.1.1.deb state=installed
+
+  - hosts: all
+    sudo: True
+    user: ashokrajar
+
+    vars:
+      clustername: rootconf
+      clustermaster: "192.168.10.10"
+
+    tasks:
+    - name: Configure the Nodes
+      template: src=elasticsearch.j2 dest=/etc/elasticsearch/elasticsearch.yml
+
+    - name: Start Daemons
+      service: name=elasticsearch state=started
+      tags:
+        - start_service
+
+    - name: Check Service Status
+      local_action: uri url=http://{{ inventory_hostname }}:9200/_cluster/health?pretty return_content=yes
+      register: response
+      tags: check_status
+
+    - name: Display Service Status
+      debug: msg="Cluster Status {{ response.content }}"
+      tags: check_status

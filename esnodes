@@ -1,0 +1,3 @@
+[es-servers]
+192.168.10.10 clusternodename=node01
+192.168.10.11 clusternodename=node02
