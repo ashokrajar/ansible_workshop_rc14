@@ -1,0 +1,13 @@
+---
+- name: Take backup of sudoers file
+  command: cp -f /etc/sudoers /etc/sudoers.bak
+
+- name: Copy sudoers files for changes
+  command: cp -f /etc/sudoers /etc/sudoers.chg
+
+- name: Password less sudo for ME
+  action: "lineinfile dest=/etc/sudoers.chg state=present regexp='^%{{ item }}' line='%{{ item }} ALL=(ALL) NOPASSWD: ALL'"
+  with_items: sudo_users
+
+- name: Push sudoers file for real
+  shell: visudo -q -c -f /etc/sudoers.chg && cp -f /etc/sudoers.chg /etc/sudoers

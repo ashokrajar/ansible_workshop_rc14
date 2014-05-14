@@ -1,0 +1,7 @@
+---
+- hosts: webservers
+  sudo: True
+  user: ashokrajar
+  roles:
+    - common
+    - webserver
