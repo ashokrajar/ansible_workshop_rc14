@@ -1,3 +1,11 @@
 ---
-- include: webservers.yml
-- include: haproxys.yml
+- hosts: webservers
+  sudo: True
+  roles:
+    - common
+    - webserver
+- hosts: haproxys
+  sudo: True
+  roles:
+    - common
+    - haproxy
