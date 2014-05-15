@@ -3,7 +3,7 @@
   yum: name=httpd state=present
 
 - name: Create index.html file
-  template: src=index.j2 dest=/var/www/html/index.html
+  template: src=index.j2 dest=/var/www/html/index.html mode=644
 
 - name: http service state
   service: name=httpd state=started enabled=yes
