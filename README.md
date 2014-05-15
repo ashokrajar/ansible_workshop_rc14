@@ -14,7 +14,8 @@ There are 2 Vagrantfiles currently.
 
 Make sure the Vagrantfile is one folder above the ansible folder
 
-```ls  -lh
+```
+ls  -lh
 total 40
 -rw-r--r--   1 Madhurranjan  Group 675B May 14 23:24 Vagrantfile
 drwxr-xr-x  20 Madhurranjan  Group 680B May 14 23:28 ansible_workshop_rc14
