@@ -1,7 +1,6 @@
 ---
   - hosts: all
     sudo: True
-    user: ashokrajar
 
     tasks:
     - name: Copy Dependency Files
@@ -14,7 +13,6 @@
 
   - hosts: CentOS:RedHat
     sudo: True
-    user: ashokrajar
 
     tasks:
     - name: Install Java
@@ -25,7 +23,6 @@
 
   - hosts: Ubuntu
     sudo: True
-    user: ashokrajar
 
     tasks:
     - name: Install Java
@@ -36,7 +33,6 @@
 
   - hosts: all
     sudo: True
-    user: ashokrajar
 
     vars:
       clustername: rootconf
