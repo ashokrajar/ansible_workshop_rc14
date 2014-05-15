@@ -14,7 +14,7 @@ There are 2 Vagrantfiles currently.
 
 Make sure the Vagrantfile is one folder above the ansible folder
 
-ls  -lh
+```ls  -lh
 total 40
 -rw-r--r--   1 Madhurranjan  Group 675B May 14 23:24 Vagrantfile
 drwxr-xr-x  20 Madhurranjan  Group 680B May 14 23:28 ansible_workshop_rc14
@@ -22,7 +22,9 @@ drwxr-xr-x  20 Madhurranjan  Group 680B May 14 23:28 ansible_workshop_rc14
 -rw-r--r--   1 Madhurranjan  Group 82B May 14 22:41 vagrant_ansible_inventory_machine1
 -rw-r--r--   1 Madhurranjan  Group 82B May 14 22:41 vagrant_ansible_inventory_machine2
 -rw-r--r--   1 Madhurranjan  Group 82B May 14 22:42 vagrant_ansible_inventory_machine3
+```
 
+```
 vagrant up --no-provision
 Bringing machine 'machine1' up with 'virtualbox' provider...
 Bringing machine 'machine2' up with 'virtualbox' provider...
@@ -77,4 +79,4 @@ Bringing machine 'machine3' up with 'virtualbox' provider...
 [machine3] Configuring and enabling network interfaces...
 [machine3] Mounting shared folders...
 [machine3] -- /vagrant
-
+```
