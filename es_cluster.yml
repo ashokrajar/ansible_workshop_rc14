@@ -1,7 +1,7 @@
 ---
   - hosts: all
     sudo: True
-#    user: ashokrajar
+    user: ashokrajar
 
     tasks:
     - name: Copy Dependency Files
@@ -14,7 +14,7 @@
 
   - hosts: CentOS:RedHat
     sudo: True
-#    user: ashokrajar
+    user: ashokrajar
 
     tasks:
     - name: Stop iptables
@@ -31,7 +31,7 @@
 
   - hosts: Ubuntu
     sudo: True
-#    user: ashokrajar
+    user: ashokrajar
 
     tasks:
     - name: Install Java
@@ -42,7 +42,7 @@
 
   - hosts: all
     sudo: True
-#    user: ashokrajar
+    user: ashokrajar
 
     vars:
       clustername: rootconf
