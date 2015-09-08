@@ -1,22 +1,28 @@
 ---
   - hosts: all
     sudo: True
-    user: ashokrajar
+#    user: ashokrajar
 
     tasks:
     - name: Copy Dependency Files
       copy: src={{ item }} dest=/opt/
       with_fileglob:
-        - /Users/Ashok/Downloads/ansible_workshop_rc14/*
+        - software/*
 
     - name: group hosts by distribution
       group_by: key="{{ ansible_distribution }}"
 
   - hosts: CentOS:RedHat
     sudo: True
-    user: ashokrajar
+#    user: ashokrajar
 
     tasks:
+    - name: Stop iptables
+      service: name=iptables state=stopped
+
+    - name: Install python-httplib2
+      yum: name=python-httplib2 state=present
+
     - name: Install Java
       yum: name=/opt/jdk-7u55-linux-x64.rpm state=present
 
@@ -25,7 +31,7 @@
 
   - hosts: Ubuntu
     sudo: True
-    user: ashokrajar
+#    user: ashokrajar
 
     tasks:
     - name: Install Java
@@ -36,7 +42,7 @@
 
   - hosts: all
     sudo: True
-    user: ashokrajar
+#    user: ashokrajar
 
     vars:
       clustername: rootconf
@@ -52,7 +58,7 @@
         - start_service
 
     - name: Check Service Status
-      local_action: uri url=http://{{ inventory_hostname }}:9200/_cluster/health?pretty return_content=yes
+      uri: url=http://{{ 192.168.33.10 }}:9200/_cluster/health?pretty return_content=yes
       register: response
       tags: check_status
 

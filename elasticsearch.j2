@@ -54,7 +54,7 @@ node.name: {{ clusternodename }}
 #
 # 1. You want this node to never become a master node, only to hold data.
 #    This will be the "workhorse" of your cluster.
-#
+#bin
 # node.master: false
 # node.data: true
 #
@@ -209,7 +209,7 @@ node.name: {{ clusternodename }}
 
 # Set both 'bind_host' and 'publish_host':
 #
-# network.host: 192.168.0.1
+network.host: {{ inventory_hostname }}
 
 # Set a custom port for the node to node communication (9300 by default):
 #

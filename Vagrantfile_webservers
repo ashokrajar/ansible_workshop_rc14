@@ -1,0 +1,35 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "centos"
+
+
+  config.vm.define 'machine1' do |machine|
+    machine.vm.hostname = 'machine1'
+    machine.vm.network "private_network", ip: "192.168.33.10"
+    machine.vm.network :forwarded_port, guest: 80, host: 8080
+  end
+  config.vm.define 'machine2' do |machine|
+    machine.vm.hostname = 'machine2'
+    machine.vm.network "private_network", ip: "192.168.33.11"
+    machine.vm.network :forwarded_port, guest: 80, host: 8081
+  end
+  config.vm.define 'machine3' do |machine|
+    machine.vm.hostname = 'machine3'
+    machine.vm.network "private_network", ip: "192.168.33.12"
+    machine.vm.network :forwarded_port, guest: 80, host: 8082
+    machine.vm.provision :ansible do |ansible|
+      ansible.sudo = true
+      ansible.playbook = "ansible_workshop_rc14/site.yml"
+      ansible.inventory_path = "ansible_workshop_rc14/devnodes"
+    end
+  end
+  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+# config.vm.network :private_network, ip: "192.168.33.10"
+
+end
